@@ -57,7 +57,7 @@ int isFull_linear(linearqueue *q)
 
 int isEmpty_linear(linearqueue *q)
 {
-    return q->rear == q->front + 1;
+    return q->front == q->rear - 1;
 }
 
 void enqueue_linear(linearqueue *q, SPI_ITEM data)
@@ -69,17 +69,16 @@ void enqueue_linear(linearqueue *q, SPI_ITEM data)
     }
     q->queue[q->rear] = data;
     q->rear++;
-    q->front--;
 }
 
 int dequeue_linear(linearqueue *q)
 {
-    isEmpty_linear(q) ? printf("Queue is empty\n") : q->front++, q->rear--;
+    isEmpty_linear(q) ? printf("Queue is empty\n") : q->front++;
 }
 
 SPI_ITEM peek_linear(linearqueue *q)
 {
-    isEmpty_linear(q) ? printf("Queue is empty\n") :( printf("peek_linear: \n 0x%.2x\n", q->queue[q->front + 1].mode), printf("0x%.2x\n", q->queue[q->front + 1].reg), printf("0x%.2x\n", q->queue[q->front + 1].data));
+    //isEmpty_linear(q) ? printf("Queue is empty\n") :( printf("peek_linear: \n 0x%.2x\n", q->queue[q->front + 1].mode), printf("0x%.2x\n", q->queue[q->front + 1].reg), printf("0x%.2x\n", q->queue[q->front + 1].data));
     return q->queue[q->front + 1];
 }
 
