@@ -1,43 +1,58 @@
 #include "linear_queue.h"
 #include "circular_queue.h"
 
-typedef enum GPIO_PIN
+
+
+//GPI_PIN_HANDLER(GPIO_ITEM){}
+
+void SPI_PIN_HANDLER(SPI_ITEM *q, SPI_ITEM item)
 {
-    CS = 0xA0,// Chip select
-    int1 = 0xA1,// Interrupt 1
-    int2 = 0xA2,// Interrupt 2
-    int3 = 0xA3,// Interrupt 3
-    int4 = 0xA4,// Interrupt 4
+    switch (q->qu)
+    {
+    case constant expression:
+        /* code */
+        break;
+    
+    default:
+        break;
+    }
 
-} gpio;
-
-typedef enum SPI_PIN
-{
-    SDO = 0xE0,// Data output(read)
-    SDI = 0xE1,// Data input(write)
-    SCK = 0xE2,// Clock
-} spi;
-
-typedef enum{
-
-    INTERRUPT_REGISTER = 0x20,
-    Gravity_L = 0x10,
-    Gravity_H = 0x11,
-
-}ACCELERATION_REGISTERS;
-
-typedef enum{
-        
 }
+int main()
+{
+    linearqueue l;
+    circularqueue c;
+    initLinearqueue(&l);
+    initCircularqueue(&c);
+
+    SPI_ITEM item_spi[MAX_LINEAR] = {
+        {.mode = SDO,
+         .reg = Gravity_L,
+         .data = NULL},
+        {.mode = SDI,
+         .reg = Gravity_H,
+         .data = NULL},
+        {.mode = SDO,
+         .reg = Gravity_H,
+         .data = NULL},
+        {.mode = SDO,
+         .reg = Gravity_H,
+         .data = NULL},
+        {.mode = SDO,
+         .reg = INTERRUPT_REGISTER,
+         .data = NULL},
+
+    };
+
+    gpio item_gpio[MAX_CIRCULAR] = {CS, INT1, INT2, INT4, INT3, CS, INT2, CS, INT4, INT3};
+
+    uint8_t size_item_spi = sizeof(item_spi)/sizeof(item_spi[0]);
+    for (int i = 0; i < size_item_spi; i++)
+    {
+        enqueue_linear(&l, item_spi[i]);
+        isFull_linear(&l) ? SPI_PIN_HANDLER : NULL ; 
+    }
 
 
-
-int main(){
-    linearqueue L;
-    circularqueue C; 
-
-    
-
-    
     return 0;
 }

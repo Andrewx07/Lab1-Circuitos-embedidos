@@ -10,7 +10,6 @@ struct bitfield//fixed from class
     uint8_t : 3;
 };
 
-
 typedef union INTERRUPT
 {
     uint8_t byte;
