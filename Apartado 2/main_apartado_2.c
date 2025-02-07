@@ -1,6 +1,9 @@
 #include "linear_queue.h"
 #include "circular_queue.h"
 
+
+
+//Action on registers from SPI
 void SPI_PIN_HANDLER(linearqueue *q)
 {
     printf("Read/write data from SPI registers: \n");
@@ -41,7 +44,10 @@ void SPI_PIN_HANDLER(linearqueue *q)
     printf("\n");
 }
 
-void GPI_PIN_HANDLER(circularqueue *q)
+
+
+//GPIO interruption handler
+void GPIO_PIN_HANDLER(circularqueue *q)
 {
     printf("Interruptions to handle on GPIO: \n");
     while (!isEmpty_circular(q))
@@ -113,7 +119,7 @@ int main()
         enqueue_circular(&c, item_gpio[i]);
     }
 
-    GPI_PIN_HANDLER(&c);
+    GPIO_PIN_HANDLER(&c);
 
     return 0;
 }

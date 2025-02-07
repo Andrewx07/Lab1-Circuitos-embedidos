@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #define MAX_CIRCULAR 10
 
+//interruption pin address
 typedef enum GPIO_PIN
 {
     CS = 0xA0,   // Chip select(input)
@@ -16,6 +17,7 @@ typedef enum GPIO_PIN
 
 } gpio;
  
+//circular queue
 typedef struct {
     gpio queue[MAX_CIRCULAR] __attribute__((packed));
     int8_t front;

@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #define MAX_LINEAR 5
 
+//action from register
 typedef enum SPI_PIN
 {
     SDO = 0xE0, // Data output(read)
@@ -13,6 +14,7 @@ typedef enum SPI_PIN
     SCK = 0xE2, // Clock
 } SPI;
 
+//register address
 typedef enum
 {
     Gravity_L = 0x10,
@@ -21,6 +23,7 @@ typedef enum
     DEVICE_DEFINITION = 0xff,
 } ACCEL_REG;
 
+//item for spi pin
 typedef struct
 {
     SPI mode;
@@ -29,6 +32,7 @@ typedef struct
 
 } SPI_ITEM;
 
+//linear queue
 typedef struct 
 {
     SPI_ITEM queue[MAX_LINEAR] __attribute__((packed));
@@ -89,6 +93,7 @@ void display_linear(linearqueue *q)
         printf("Queue is empty\n");
         return;
     }
+    
     printf("Queue register: \n");
     for (uint8_t i = q->front + 1; i < q->rear; i++)
     {
