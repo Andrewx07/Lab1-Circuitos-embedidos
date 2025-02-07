@@ -29,9 +29,9 @@ typedef struct
 
 } SPI_ITEM;
 
-typedef struct __attribute__((packed))
+typedef struct 
 {
-    SPI_ITEM queue[MAX_LINEAR];
+    SPI_ITEM queue[MAX_LINEAR] __attribute__((packed));
     int8_t front;
     int8_t rear;
 } linearqueue;

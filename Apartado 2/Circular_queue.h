@@ -16,8 +16,8 @@ typedef enum GPIO_PIN
 
 } gpio;
  
-typedef struct __attribute__((packed)) {
-    gpio queue[MAX_CIRCULAR];
+typedef struct {
+    gpio queue[MAX_CIRCULAR] __attribute__((packed));
     int8_t front;
     int8_t rear;
 }circularqueue;
