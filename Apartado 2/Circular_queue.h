@@ -17,9 +17,18 @@ typedef enum GPIO_PIN
 
 } gpio;
  
+typedef enum//fixed from class
+{
+    Touch = 0x01;
+    Gravity = 0x02;
+    inactivity = 0x03;
+    double_tap = 0x04;
+
+}interruptions;
+
 //circular queue
-typedef struct {
-    gpio queue[MAX_CIRCULAR] __attribute__((packed));
+typedef struct ____attribute__((packed)){
+    interruptions queue[MAX_CIRCULAR];
     int8_t front;
     int8_t rear;
 }circularqueue;
