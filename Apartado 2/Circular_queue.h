@@ -109,7 +109,7 @@ void display_circular (circularqueue* q){
     printf("\n");
 }
 
-
+//GPIO interruption handler
 void GPIO_PIN_HANDLER(circularqueue *q)
 {
     printf("Interruptions to handle on GPIO: \n");

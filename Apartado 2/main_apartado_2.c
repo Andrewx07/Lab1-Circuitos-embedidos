@@ -1,15 +1,6 @@
 #include "linear_queue.h"
 #include "circular_queue.h"
 
-
-
-
-
-
-
-//GPIO interruption handler
-
-
 int main()
 {
     linearqueue l;
