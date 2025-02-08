@@ -12,5 +12,4 @@ typedef enum//fixed from class
 
 typedef struct ITEM{
     interruptions interrupt;
-    
 }item;

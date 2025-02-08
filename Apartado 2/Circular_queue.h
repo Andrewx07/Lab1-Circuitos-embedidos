@@ -17,18 +17,18 @@ typedef enum GPIO_PIN
 
 } gpio;
  
-typedef enum//fixed from class
+typedef enum interruptions//fixed from class
 {
-    Touch = 0x01;
-    Gravity = 0x02;
-    inactivity = 0x03;
-    double_tap = 0x04;
+    Touch = 0x01,
+    Gravity_change = 0x02,
+    Inactivity = 0x03,
+    Double_tap = 0x04,
 
-}interruptions;
+}interrupts;
 
 //circular queue
-typedef struct ____attribute__((packed)){
-    interruptions queue[MAX_CIRCULAR];
+typedef struct __attribute__((packed)){
+    interrupts queue[MAX_CIRCULAR];
     int8_t front;
     int8_t rear;
 }circularqueue;
@@ -108,5 +108,39 @@ void display_circular (circularqueue* q){
     }
     printf("\n");
 }
+
+
+void GPIO_PIN_HANDLER(circularqueue *q)
+{
+    printf("Interruptions to handle on GPIO: \n");
+    while (!isEmpty_circular(q))
+    {
+        switch (peek_circular(q))
+        {
+        case CS:
+            break;
+        case Touch:
+            printf("interruption: touch 0x%.2x\n", INT1);
+
+            break;
+        case Gravity_change:
+            printf("interruption: Gravity change 0x%.2x\n", INT2);
+            break;
+        case Inactivity:
+            printf("interruption: inactivity 0x%.2x\n", INT3);
+            break;
+        case Double_tap:
+            printf("interruption: double tap 0x%.2x\n", INT4);
+            break;
+        default:
+            printf("Unknow interruption\n");
+            break;
+        }
+        dequeue_circular(q);
+    }
+    printf("\n");
+}
+
+
 #endif
 
