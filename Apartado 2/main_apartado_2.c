@@ -8,6 +8,7 @@ int main()
     initLinearqueue(&l);
     initCircularqueue(&c);
 
+    //defitions of spi items
     SPI_ITEM item_spi[MAX_LINEAR] = {
         {.mode = READ,
          .reg = Gravity_L,
@@ -27,6 +28,7 @@ int main()
 
     };
 
+    //definiton of gpio items
     interrupts item_gpio[MAX_CIRCULAR] = {Touch, Gravity_change, Inactivity, Double_tap, Touch, Inactivity, Double_tap, Gravity_change, Touch, Inactivity };
 
     for (int i = 0; i < MAX_LINEAR; i++)

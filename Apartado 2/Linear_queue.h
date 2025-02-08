@@ -14,6 +14,7 @@ typedef enum SPI_PIN
     SCK = 0xE2, // Clock
 } SPI;
 
+//Bitifield for device definitions
 struct bitfield_definitions 
 {
     uint8_t bit_0 : 1;
@@ -28,6 +29,8 @@ union definitions
     struct bitfield_definitions definitions;
 };
 
+
+//Bitifield for Gravity L register
 struct bitfield_Gravity_L 
 {
     uint8_t : 1;
@@ -45,6 +48,8 @@ union gravity_L
     struct bitfield_Gravity_L G_L;
 };
 
+
+//Bitfield for Gravity H register
 struct bitfield_Gravity_H
 {
     uint8_t bit_0 : 1;
@@ -61,6 +66,7 @@ union gravity_H
 };
 
 
+// Bitfield for Interrupt configure
 struct interrupt_configure
 {
     uint8_t bit_0 : 1;
@@ -77,7 +83,7 @@ union interrupt
 };
 
 
-
+//action to do for SPI
 typedef enum
 { 
     READ = 0xff,
@@ -93,8 +99,6 @@ typedef enum
     INTERRUPT_REGISTER = 0x20,
     DEVICE_DEFINITION = 0xff,
 } ACCEL_REG;
-
-
 
 
 // item for spi pin
@@ -122,22 +126,27 @@ int dequeue_linear(linearqueue *queue);
 SPI_ITEM peek_linear(linearqueue *queue);
 void display_linear(linearqueue *queue);
 
+
+//initialization of linear queue for SPI
 void initLinearqueue(linearqueue *q)
 {
     q->front = -1;
     q->rear = 0;
 }
 
+//check if the queue is full
 int isFull_linear(linearqueue *q)
 {
     return q->rear == MAX_LINEAR;
 }
 
+//chech if the queue is empty
 int isEmpty_linear(linearqueue *q)
 {
     return q->front == q->rear - 1;
 }
 
+//push an item on the queue
 void enqueue_linear(linearqueue *q, SPI_ITEM data)
 {
     if (isFull_linear(q))
@@ -149,17 +158,19 @@ void enqueue_linear(linearqueue *q, SPI_ITEM data)
     q->rear++;
 }
 
+//pop an item on the queue
 int dequeue_linear(linearqueue *q)
 {
     isEmpty_linear(q) ? printf("Queue is empty\n") : q->front++;
 }
 
+//peek the top of the queue
 SPI_ITEM peek_linear(linearqueue *q)
 {
-    // isEmpty_linear(q) ? printf("Queue is empty\n") :( printf("peek_linear: \n 0x%.2x\n", q->queue[q->front + 1].mode), printf("0x%.2x\n", q->queue[q->front + 1].reg), printf("0x%.2x\n", q->queue[q->front + 1].data));
     return q->queue[q->front + 1];
 }
 
+//display all the queue 
 void display_linear(linearqueue *q)
 {
     if (isEmpty_linear(q))
